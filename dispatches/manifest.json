@@ -1,0 +1,26 @@
+{
+  "dispatches": [
+    {
+      "id": "002",
+      "slug": "002-dust-and-static",
+      "title": "Dust and Static",
+      "date": "2026-03-20",
+      "classification": "CLASSIFIED",
+      "correspondent": "M. Okafor",
+      "summary": "Communications array picks up structured noise from sector 7. Pattern analysis suggests non-natural origin.",
+      "tags": ["communications", "sector-7", "anomaly"],
+      "images": ["hero.webp"]
+    },
+    {
+      "id": "001",
+      "slug": "001-phantom-signal",
+      "title": "Phantom Signal",
+      "date": "2026-03-15",
+      "classification": "RESTRICTED",
+      "correspondent": "K. Vasquez",
+      "summary": "Survey relay picks up a repeating pulse from the northern exclusion zone. No registered transmitters in range.",
+      "tags": ["survey", "exclusion-zone", "signal"],
+      "images": ["hero.webp"]
+    }
+  ]
+}

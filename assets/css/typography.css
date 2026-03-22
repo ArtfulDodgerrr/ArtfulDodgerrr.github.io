@@ -1,0 +1,84 @@
+/* === TYPOGRAPHY === */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+body {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: var(--line-height);
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3 {
+  line-height: var(--line-height-tight);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+small, .text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-xs {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+strong, .text-bold {
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+}
+
+/* Terminal-style prompt prefix */
+.prompt::before {
+  content: '> ';
+  color: var(--accent-teal);
+}
+
+/* Monospace code blocks */
+code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  background: var(--bg-surface);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--accent-teal);
+  color: var(--bg-primary);
+}

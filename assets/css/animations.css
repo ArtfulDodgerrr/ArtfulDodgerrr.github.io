@@ -1,0 +1,130 @@
+/* === ANIMATIONS === */
+
+/* --- Page load fade-in --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp var(--transition-slow) ease-out both;
+}
+
+.fade-in-1 { animation-delay: 0ms; }
+.fade-in-2 { animation-delay: 80ms; }
+.fade-in-3 { animation-delay: 160ms; }
+.fade-in-4 { animation-delay: 240ms; }
+.fade-in-5 { animation-delay: 320ms; }
+
+/* Stagger dispatch cards */
+.dispatch-card {
+  animation: fadeInUp var(--transition-slow) ease-out both;
+}
+
+.dispatch-card:nth-child(1) { animation-delay: 100ms; }
+.dispatch-card:nth-child(2) { animation-delay: 160ms; }
+.dispatch-card:nth-child(3) { animation-delay: 220ms; }
+.dispatch-card:nth-child(4) { animation-delay: 280ms; }
+.dispatch-card:nth-child(5) { animation-delay: 340ms; }
+.dispatch-card:nth-child(6) { animation-delay: 400ms; }
+.dispatch-card:nth-child(7) { animation-delay: 460ms; }
+.dispatch-card:nth-child(8) { animation-delay: 520ms; }
+
+/* --- Classification badge pulse --- */
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.badge--classified {
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+/* --- Terminal cursor blink --- */
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  background: var(--accent-teal-bright);
+  vertical-align: text-bottom;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+/* --- Scan line sweep (triggered by JS) --- */
+@keyframes scanSweep {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+.scan-sweep {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-teal-bright),
+    var(--accent-teal),
+    transparent
+  );
+  z-index: 9999;
+  pointer-events: none;
+  animation: scanSweep 300ms linear forwards;
+  box-shadow: 0 0 20px var(--accent-teal), 0 0 60px var(--accent-teal-bright);
+}
+
+/* --- Click particle --- */
+.click-particle {
+  position: fixed;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  background: var(--accent-teal-bright);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform, opacity;
+}
+
+/* --- Hover fizz dots --- */
+.fizz-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  pointer-events: none;
+  z-index: 50;
+  will-change: transform, opacity;
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scan-sweep,
+  .click-particle,
+  .fizz-dot {
+    display: none !important;
+  }
+}

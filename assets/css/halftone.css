@@ -1,0 +1,80 @@
+/* === HALFTONE & SCAN LINE EFFECTS === */
+/* CSS-only base layer — canvas enhancement in halftone.js replaces this visually */
+
+/* Halftone dot background (CSS fallback) */
+.halftone-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, var(--halftone-dot-light) 1px, transparent 1px);
+  background-size: var(--dot-gap) var(--dot-gap);
+  background-position: 0 0;
+  opacity: 0.6;
+}
+
+/* Canvas replaces the CSS dots when JS loads */
+.halftone-bg.has-canvas {
+  background-image: none;
+}
+
+#halftone-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Scan line overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* Subtle vignette effect */
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(10, 22, 40, 0.4) 100%
+  );
+}
+
+/* Decorative halftone stripe — can be placed as a section divider */
+.halftone-divider {
+  width: 100%;
+  height: 24px;
+  margin: var(--space-lg) 0;
+  background-image:
+    radial-gradient(circle, var(--accent-teal) 1.5px, transparent 1.5px);
+  background-size: 8px 8px;
+  opacity: 0.3;
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}

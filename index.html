@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DISPATCH TERMINAL</title>
+  <meta name="description" content="Field dispatches from the outer reaches. Classified transmissions, survey reports, and signal intercepts.">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/halftone.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/animations.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23007171'/></svg>">
+
+  <!-- JS -->
+  <script type="module" src="/assets/js/main.js"></script>
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="halftone-bg" id="halftone-bg"></div>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="site-logo"><a href="/">DISPATCH TERMINAL</a></div>
+      <nav class="site-nav">
+        <a href="/" class="active">Dispatches</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="site-main">
+    <div class="container">
+
+      <!-- Terminal intro block -->
+      <div class="terminal-block fade-in fade-in-1">
+        <p class="line line--highlight">ACCESSING DISPATCH ARCHIVE...</p>
+        <p class="line">SECURITY CLEARANCE: VERIFIED</p>
+        <p class="line">2 RECORDS FOUND<span class="cursor"></span></p>
+      </div>
+
+      <!-- Dispatch listing -->
+      <ul class="dispatch-list" data-dispatch-list>
+
+        <li class="dispatch-card" onclick="window.location='/dispatches/002-dust-and-static/'">
+          <span class="dispatch-card__id">[ 002 ]</span>
+          <span class="dispatch-card__title">Dust and Static</span>
+          <span class="dispatch-card__date">2026.03.20</span>
+          <span class="dispatch-card__badge badge--classified">CLASSIFIED</span>
+          <span class="dispatch-card__summary">Communications array picks up structured noise from sector 7. Pattern analysis suggests non-natural origin.</span>
+        </li>
+
+        <li class="dispatch-card" onclick="window.location='/dispatches/001-phantom-signal/'">
+          <span class="dispatch-card__id">[ 001 ]</span>
+          <span class="dispatch-card__title">Phantom Signal</span>
+          <span class="dispatch-card__date">2026.03.15</span>
+          <span class="dispatch-card__badge badge--restricted">RESTRICTED</span>
+          <span class="dispatch-card__summary">Survey relay picks up a repeating pulse from the northern exclusion zone. No registered transmitters in range.</span>
+        </li>
+
+      </ul>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Transmission Ends</p>
+    </div>
+  </footer>
+
+</body>
+</html>
