@@ -24,8 +24,9 @@ const CONFIG = {
   bufferSize: 80,
 
   // Characters used for garbled text (terminal/alien feel)
-  // Only single-width monospace-safe chars — no full-width box-drawing
-  glitchChars: '|/-\\:;{}[]<>!@#$%&*=+~?.^_`\'',
+  // ONLY alphanumerics — guaranteed identical width in any monospace font.
+  // Mixed case + digits gives enough visual noise without layout shift.
+  glitchChars: 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789',
 
   // How often garbled characters re-randomize (for flickering effect)
   flickerInterval: 120,
@@ -98,22 +99,17 @@ function wrapWords() {
  */
 function garbleWord(original, factor) {
   if (factor <= 0) return original;
-  if (factor >= 1) {
-    // Fully garbled — all noise characters
-    let result = '';
-    for (let i = 0; i < original.length; i++) {
-      result += NOISE[Math.floor(Math.random() * NOISE.length)];
-    }
-    return result;
-  }
 
-  // Partial garble — replace some characters based on factor
   let result = '';
   for (let i = 0; i < original.length; i++) {
-    if (Math.random() < factor) {
+    const ch = original[i];
+    // Only garble letters and digits — preserve punctuation, dashes,
+    // apostrophes etc. in place so they keep their exact glyph width
+    const isAlphaNum = (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9');
+    if (isAlphaNum && Math.random() < factor) {
       result += NOISE[Math.floor(Math.random() * NOISE.length)];
     } else {
-      result += original[i];
+      result += ch;
     }
   }
   return result;
