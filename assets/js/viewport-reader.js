@@ -24,7 +24,8 @@ const CONFIG = {
   bufferSize: 80,
 
   // Characters used for garbled text (terminal/alien feel)
-  glitchChars: '█▓░▒│┤┐└┴┬├┼─╌╎·:;{}[]<>!@#$%&*=+~?/\\',
+  // Only single-width monospace-safe chars — no full-width box-drawing
+  glitchChars: '|/-\\:;{}[]<>!@#$%&*=+~?.^_`\'',
 
   // How often garbled characters re-randomize (for flickering effect)
   flickerInterval: 120,
