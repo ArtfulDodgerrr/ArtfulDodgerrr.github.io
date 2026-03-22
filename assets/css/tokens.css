@@ -3,30 +3,31 @@
 
 :root {
   /* --- Colors --- */
-  --bg-primary: #0a1628;          /* Deep navy, near-black */
-  --bg-secondary: #0d2137;        /* Slightly lighter navy for cards */
-  --bg-surface: #112a3a;          /* Surface/panel backgrounds */
-  --bg-surface-hover: #163545;    /* Surface hover state */
+  --bg-primary: #000000;          /* Pure black */
+  --bg-secondary: #0a0a0a;       /* Near-black for cards */
+  --bg-surface: #111111;          /* Surface/panel backgrounds */
+  --bg-surface-hover: #1a1a1a;    /* Surface hover state */
 
-  --text-primary: #c8d6d6;        /* Light teal-grey for body text */
-  --text-secondary: #8fa8a8;      /* Secondary text */
-  --text-muted: #4d6e6e;          /* Dimmed text, metadata */
+  --text-primary: #b8b0a8;        /* Warm grey — parchment-tone text */
+  --text-secondary: #7a7268;      /* Secondary text */
+  --text-muted: #4a4540;          /* Dimmed text, metadata */
 
-  --accent-primary: #d4a537;      /* Amber/gold — links, highlights */
-  --accent-hover: #e8bc4a;        /* Lighter amber on hover */
-  --accent-teal: #007171;         /* Teal — decorative elements */
-  --accent-teal-bright: #00a3a3;  /* Brighter teal for emphasis */
+  --accent-primary: #c4956a;      /* Muted copper — links, highlights */
+  --accent-hover: #d4a87a;        /* Lighter copper on hover */
+  --accent-glyph: #6b5b4e;       /* Muted warm brown — decorative elements */
+  --accent-glyph-bright: #8a7565; /* Brighter glyph for emphasis */
 
-  --halftone-dot: #007171;        /* Halftone dot base color */
-  --halftone-dot-light: #00717133; /* Semi-transparent variant */
-  --halftone-dot-alt: #00565640;  /* Alternate dot color */
+  --halftone-dot: #6b5b4e;        /* Halftone dot base — muted warm umber */
+  --halftone-dot-light: #6b5b4e28; /* Semi-transparent variant */
+  --halftone-dot-alt: #5a4a3d40;  /* Alternate dot color */
 
-  --badge-classified: #c0392b;    /* CLASSIFIED red */
-  --badge-restricted: #d4a537;    /* RESTRICTED amber */
-  --badge-open: #007171;          /* OPEN teal */
+  --badge-classified: #8b3a2a;    /* CLASSIFIED — dark rust */
+  --badge-restricted: #9e7a3a;    /* RESTRICTED — dark gold */
+  --badge-open: #5a7a5a;          /* OPEN — muted sage */
 
   /* --- Typography --- */
-  --font-mono: 'IBM Plex Mono', 'Fira Code', 'Courier New', monospace;
+  --font-display: 'Share Tech Mono', 'Courier New', monospace;
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
   --font-size-xs: 0.7rem;
   --font-size-sm: 0.85rem;
   --font-size-base: 1rem;
@@ -49,12 +50,12 @@
   --container-padding: var(--space-lg);
 
   /* --- Effects --- */
-  --dot-size: 3px;
+  --dot-size: 2px;
   --dot-gap: 12px;
   --transition-fast: 150ms;
   --transition-base: 250ms;
   --transition-slow: 400ms;
-  --border-radius: 2px;
+  --border-radius: 1px;
 }
 
 /* --- Responsive overrides --- */

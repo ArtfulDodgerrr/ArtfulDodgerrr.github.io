@@ -11,10 +11,10 @@
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(circle, var(--halftone-dot-light) 1px, transparent 1px);
+    radial-gradient(circle, var(--halftone-dot-light) 0.5px, transparent 0.5px);
   background-size: var(--dot-gap) var(--dot-gap);
   background-position: 0 0;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 /* Canvas replaces the CSS dots when JS loads */
@@ -45,8 +45,8 @@
     to bottom,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
   );
 }
 
@@ -61,20 +61,20 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
-    transparent 50%,
-    rgba(10, 22, 40, 0.4) 100%
+    transparent 40%,
+    rgba(0, 0, 0, 0.5) 100%
   );
 }
 
-/* Decorative halftone stripe — can be placed as a section divider */
+/* Decorative halftone stripe — section divider */
 .halftone-divider {
   width: 100%;
-  height: 24px;
+  height: 16px;
   margin: var(--space-lg) 0;
   background-image:
-    radial-gradient(circle, var(--accent-teal) 1.5px, transparent 1.5px);
+    radial-gradient(circle, var(--halftone-dot) 1px, transparent 1px);
   background-size: 8px 8px;
-  opacity: 0.3;
+  opacity: 0.2;
   mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
 }

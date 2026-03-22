@@ -39,7 +39,7 @@
 /* --- Classification badge pulse --- */
 @keyframes badgePulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  50% { opacity: 0.5; }
 }
 
 .badge--classified {
@@ -56,62 +56,161 @@
   display: inline-block;
   width: 0.6em;
   height: 1.1em;
-  background: var(--accent-teal-bright);
+  background: var(--accent-glyph-bright);
   vertical-align: text-bottom;
   animation: cursorBlink 1s step-end infinite;
 }
 
-/* --- Scan line sweep (triggered by JS) --- */
-@keyframes scanSweep {
-  from {
-    transform: translateY(-100vh);
-  }
-  to {
-    transform: translateY(100vh);
-  }
+/* --- ASCII spinner (terminal loading) --- */
+@keyframes asciiSpin {
+  0%   { content: '|'; }
+  25%  { content: '/'; }
+  50%  { content: '—'; }
+  75%  { content: '\\'; }
+  100% { content: '|'; }
 }
 
-.scan-sweep {
+.ascii-spinner::after {
+  display: inline-block;
+  content: '|';
+  color: var(--accent-glyph-bright);
+  animation: asciiSpin 0.6s steps(1) infinite;
+  margin-left: var(--space-sm);
+}
+
+/* --- Pixel wipe transition (slower, with delay for click effects) --- */
+.pixel-wipe {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--accent-teal-bright),
-    var(--accent-teal),
-    transparent
-  );
-  z-index: 9999;
+  height: 100%;
+  z-index: 10000;
   pointer-events: none;
-  animation: scanSweep 300ms linear forwards;
-  box-shadow: 0 0 20px var(--accent-teal), 0 0 60px var(--accent-teal-bright);
 }
 
-/* --- Click particle --- */
+@keyframes pixelRowFill {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.pixel-wipe__row {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: var(--bg-primary);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: pixelRowFill 300ms steps(6) forwards;
+}
+
+/* --- Click particle (square pixel) --- */
 .click-particle {
   position: fixed;
-  width: var(--dot-size);
-  height: var(--dot-size);
-  border-radius: 50%;
-  background: var(--accent-teal-bright);
+  border-radius: 0;
+  background: var(--halftone-dot);
   pointer-events: none;
   z-index: 9998;
   will-change: transform, opacity;
 }
 
-/* --- Hover fizz dots --- */
+/* --- Hover fizz (square pixel) --- */
 .fizz-dot {
   position: absolute;
   width: 2px;
   height: 2px;
-  border-radius: 50%;
-  background: var(--accent-teal);
+  border-radius: 0;
+  background: var(--halftone-dot);
   pointer-events: none;
   z-index: 50;
   will-change: transform, opacity;
+}
+
+/* --- ASCII debris particles --- */
+.ascii-particle {
+  position: fixed;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--halftone-dot);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+/* ============================================
+   TERMINAL BUFFER — Text viewport effect
+   ============================================
+   Hard-edge overlays (opaque black) that clip text.
+   Ellipsis indicators sit at the boundary, blinking
+   as if the terminal is buffering/generating text.
+*/
+
+/* Opaque black overlays — hard clip, not gradient */
+.terminal-buffer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 50;
+  background: var(--bg-primary);
+}
+
+.terminal-buffer--top {
+  top: 0;
+  height: 18vh;
+  /* Tiny soft edge at bottom so it's not jarring */
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.terminal-buffer--bottom {
+  bottom: 0;
+  height: 18vh;
+  mask-image: linear-gradient(to top, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
+}
+
+/* Blinking ellipsis indicators at buffer boundaries */
+.buffer-indicator {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 55;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.buffer-indicator.visible {
+  opacity: 1;
+}
+
+.buffer-indicator--top {
+  top: 16vh;
+}
+
+.buffer-indicator--bottom {
+  bottom: 16vh;
+}
+
+/* The ellipsis text — blinks like terminal is thinking */
+@keyframes bufferBlink {
+  0%, 40% { opacity: 0.8; }
+  50%, 90% { opacity: 0.3; }
+  100% { opacity: 0.8; }
+}
+
+.buffer-indicator__text {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--accent-glyph);
+  letter-spacing: 0.4em;
+  animation: bufferBlink 2s steps(1) infinite;
 }
 
 /* --- Reduced motion --- */
@@ -122,9 +221,15 @@
     transition-duration: 0.01ms !important;
   }
 
-  .scan-sweep,
+  .pixel-wipe,
   .click-particle,
-  .fizz-dot {
+  .fizz-dot,
+  .ascii-particle {
+    display: none !important;
+  }
+
+  .terminal-buffer,
+  .buffer-indicator {
     display: none !important;
   }
 }

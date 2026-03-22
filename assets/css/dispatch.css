@@ -11,8 +11,9 @@
 /* Dispatch classification stamp */
 .dispatch-stamp {
   display: inline-block;
+  font-family: var(--font-display);
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: var(--space-xs) var(--space-md);
@@ -66,8 +67,8 @@
   float: left;
   margin-right: var(--space-sm);
   margin-top: 0.1em;
-  color: var(--accent-teal-bright);
-  font-weight: 600;
+  color: var(--accent-glyph-bright);
+  font-weight: 400;
 }
 
 /* Image gallery within dispatch */
@@ -78,7 +79,7 @@
   margin: var(--space-xl) 0;
 }
 
-/* End of transmission marker */
+/* End of transmission marker — ASCII art style */
 .transmission-end {
   text-align: center;
   padding: var(--space-xl) 0;
@@ -88,8 +89,12 @@
   text-transform: uppercase;
 }
 
-.transmission-end::before,
+.transmission-end::before {
+  content: '─── / / ';
+  color: var(--accent-glyph);
+}
+
 .transmission-end::after {
-  content: ' // ';
-  color: var(--accent-teal);
+  content: ' \\ \\ ───';
+  color: var(--accent-glyph);
 }

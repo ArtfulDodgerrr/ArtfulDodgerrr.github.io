@@ -35,10 +35,11 @@ body {
 }
 
 .site-logo {
+  font-family: var(--font-display);
   font-size: var(--font-size-lg);
-  font-weight: 600;
-  color: var(--accent-teal-bright);
-  letter-spacing: 0.1em;
+  font-weight: 400;
+  color: var(--accent-glyph-bright);
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
@@ -51,20 +52,47 @@ body {
   gap: var(--space-lg);
   font-size: var(--font-size-sm);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
+/* Nav links — interactive elements with click effects */
 .site-nav a {
   color: var(--text-muted);
   transition: color var(--transition-fast);
+  position: relative;
+  padding: var(--space-xs) 0;
+}
+
+.site-nav a::before {
+  content: '[ ';
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.site-nav a::after {
+  content: ' ]';
+  opacity: 0;
+  transition: opacity var(--transition-fast);
 }
 
 .site-nav a:hover {
   color: var(--accent-primary);
 }
 
+.site-nav a:hover::before,
+.site-nav a:hover::after {
+  opacity: 1;
+  color: var(--text-muted);
+}
+
 .site-nav a.active {
   color: var(--accent-primary);
+}
+
+.site-nav a.active::before,
+.site-nav a.active::after {
+  opacity: 0.5;
+  color: var(--text-muted);
 }
 
 /* Main content area */
@@ -111,11 +139,11 @@ body {
 
 .terminal-block .line::before {
   content: '> ';
-  color: var(--accent-teal);
+  color: var(--accent-glyph);
 }
 
 .terminal-block .line--highlight {
-  color: var(--accent-teal-bright);
+  color: var(--accent-glyph-bright);
 }
 
 /* Responsive */

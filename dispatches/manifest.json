@@ -1,6 +1,17 @@
 {
   "dispatches": [
     {
+      "id": "003",
+      "slug": "003-briareos-protocol",
+      "title": "The Briareos Protocol",
+      "date": "2026-04-02",
+      "classification": "CLASSIFIED",
+      "correspondent": "R. Tanaka",
+      "summary": "Recovery team encounters decommissioned combat unit operating outside its mandate. Secondary contact classified beyond correspondent clearance.",
+      "tags": ["recovery", "combat-unit", "organism", "olympus"],
+      "images": ["tactical-unit.jpg", "organism.jpg"]
+    },
+    {
       "id": "002",
       "slug": "002-dust-and-static",
       "title": "Dust and Static",

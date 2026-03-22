@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/assets/css/animations.css">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23007171'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%236b5b4e'/></svg>">
 
   <!-- JS -->
   <script type="module" src="/assets/js/main.js"></script>
@@ -47,11 +47,19 @@
       <div class="terminal-block fade-in fade-in-1">
         <p class="line line--highlight">ACCESSING DISPATCH ARCHIVE...</p>
         <p class="line">SECURITY CLEARANCE: VERIFIED</p>
-        <p class="line">2 RECORDS FOUND<span class="cursor"></span></p>
+        <p class="line">3 RECORDS FOUND<span class="cursor"></span></p>
       </div>
 
       <!-- Dispatch listing -->
       <ul class="dispatch-list" data-dispatch-list>
+
+        <li class="dispatch-card" onclick="window.location='/dispatches/003-briareos-protocol/'">
+          <span class="dispatch-card__id">[ 003 ]</span>
+          <span class="dispatch-card__title">The Briareos Protocol</span>
+          <span class="dispatch-card__date">2026.04.02</span>
+          <span class="dispatch-card__badge badge--classified">CLASSIFIED</span>
+          <span class="dispatch-card__summary">Recovery team encounters decommissioned combat unit operating outside its mandate. Secondary contact classified.</span>
+        </li>
 
         <li class="dispatch-card" onclick="window.location='/dispatches/002-dust-and-static/'">
           <span class="dispatch-card__id">[ 002 ]</span>
@@ -77,7 +85,7 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <p>Transmission Ends</p>
+      <p>── Transmission Ends ──</p>
     </div>
   </footer>
 

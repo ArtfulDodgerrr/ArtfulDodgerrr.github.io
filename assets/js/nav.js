@@ -1,28 +1,42 @@
 /**
- * nav.js — Navigation transitions
- * Adds a scan line sweep effect before page transitions.
+ * nav.js — Page transition with delay for click effects
+ *
+ * Transition: waits ~350ms (so Galaga click effects play out),
+ * then does a stepped pixel wipe — rows appear in a cascade.
+ * Slower and more deliberate than before.
  */
 
 /**
- * Trigger a scan line sweep animation
+ * Trigger a pixel wipe transition with pre-delay
  * @returns {Promise} Resolves when animation completes
  */
-function triggerScanSweep() {
+function triggerPixelWipe() {
   return new Promise((resolve) => {
-    const sweep = document.createElement('div');
-    sweep.className = 'scan-sweep';
-    document.body.appendChild(sweep);
-
-    sweep.addEventListener('animationend', () => {
-      sweep.remove();
-      resolve();
-    });
-
-    // Fallback timeout in case animationend doesn't fire
+    // Delay before starting wipe — lets click effects play
     setTimeout(() => {
-      sweep.remove();
-      resolve();
-    }, 400);
+      const overlay = document.createElement('div');
+      overlay.className = 'pixel-wipe';
+      document.body.appendChild(overlay);
+
+      const rows = 10;
+      const rowHeight = Math.ceil(window.innerHeight / rows);
+
+      for (let i = 0; i < rows; i++) {
+        const row = document.createElement('div');
+        row.className = 'pixel-wipe__row';
+        row.style.top = (i * rowHeight) + 'px';
+        row.style.height = (rowHeight + 1) + 'px';
+        row.style.animationDelay = (i * 45) + 'ms'; // Slower cascade
+        overlay.appendChild(row);
+      }
+
+      // Resolve after all rows have appeared
+      const totalDuration = rows * 45 + 350;
+      setTimeout(() => {
+        overlay.remove();
+        resolve();
+      }, totalDuration);
+    }, 300); // Pre-delay: let click particles play
   });
 }
 
@@ -30,29 +44,24 @@ function triggerScanSweep() {
  * Initialize navigation transitions
  */
 export function initNav() {
-  // Intercept internal link clicks for scan sweep effect
   document.addEventListener('click', async (e) => {
     const link = e.target.closest('a[href]');
     if (!link) return;
 
     const href = link.getAttribute('href');
 
-    // Only intercept internal links
     if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
       return;
     }
 
-    // Don't intercept if modifier keys are held (open in new tab, etc.)
     if (e.metaKey || e.ctrlKey || e.shiftKey) return;
 
     e.preventDefault();
-
-    // Run scan sweep then navigate
-    await triggerScanSweep();
+    await triggerPixelWipe();
     window.location.href = href;
   });
 
-  // Also intercept dispatch card clicks (which use onclick)
+  // Dispatch card clicks
   document.querySelectorAll('.dispatch-card[onclick]').forEach(card => {
     const originalHref = card.getAttribute('onclick')
       .replace("window.location='", '')
@@ -61,9 +70,9 @@ export function initNav() {
     card.removeAttribute('onclick');
 
     card.addEventListener('click', async (e) => {
-      if (e.target.closest('a')) return; // Let actual links handle themselves
+      if (e.target.closest('a')) return;
       e.preventDefault();
-      await triggerScanSweep();
+      await triggerPixelWipe();
       window.location.href = originalHref;
     });
   });
