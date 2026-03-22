@@ -143,74 +143,24 @@
 }
 
 /* ============================================
-   TERMINAL BUFFER — Text viewport effect
+   VIEWPORT READER — Terminal text generation
    ============================================
-   Hard-edge overlays (opaque black) that clip text.
-   Ellipsis indicators sit at the boundary, blinking
-   as if the terminal is buffering/generating text.
+   Words near viewport edges are garbled into
+   terminal noise characters. Scrolling resolves
+   the noise into readable text — as if the
+   terminal is generating/loading content.
 */
 
-/* Opaque black overlays — hard clip, not gradient */
-.terminal-buffer {
-  position: fixed;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-  z-index: 50;
-  background: var(--bg-primary);
+/* Word spans — inline so text wraps normally */
+.vr-word {
+  display: inline;
+  transition: none; /* No transition — instant swap for terminal feel */
 }
 
-.terminal-buffer--top {
-  top: 0;
-  height: 18vh;
-  /* Tiny soft edge at bottom so it's not jarring */
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-}
-
-.terminal-buffer--bottom {
-  bottom: 0;
-  height: 18vh;
-  mask-image: linear-gradient(to top, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
-}
-
-/* Blinking ellipsis indicators at buffer boundaries */
-.buffer-indicator {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 55;
-  opacity: 0;
-  transition: opacity var(--transition-base);
-  pointer-events: none;
-}
-
-.buffer-indicator.visible {
-  opacity: 1;
-}
-
-.buffer-indicator--top {
-  top: 16vh;
-}
-
-.buffer-indicator--bottom {
-  bottom: 16vh;
-}
-
-/* The ellipsis text — blinks like terminal is thinking */
-@keyframes bufferBlink {
-  0%, 40% { opacity: 0.8; }
-  50%, 90% { opacity: 0.3; }
-  100% { opacity: 0.8; }
-}
-
-.buffer-indicator__text {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
+/* Garbled state — slightly dimmer, terminal noise color */
+.vr-garbled {
   color: var(--accent-glyph);
-  letter-spacing: 0.4em;
-  animation: bufferBlink 2s steps(1) infinite;
+  opacity: 0.5;
 }
 
 /* --- Reduced motion --- */
@@ -228,8 +178,8 @@
     display: none !important;
   }
 
-  .terminal-buffer,
-  .buffer-indicator {
-    display: none !important;
+  .vr-garbled {
+    color: inherit !important;
+    opacity: 1 !important;
   }
 }
